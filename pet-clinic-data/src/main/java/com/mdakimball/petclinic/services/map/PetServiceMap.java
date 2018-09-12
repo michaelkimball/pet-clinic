@@ -1,13 +1,13 @@
 package com.mdakimball.petclinic.services.map;
 
-import com.mdakimball.petclinic.model.Person;
-import com.mdakimball.petclinic.services.CrudService;
+import com.mdakimball.petclinic.model.Pet;
+import com.mdakimball.petclinic.services.PetService;
 
 import java.util.Set;
 
-public class PersonServiceMap extends AbstractMapService<Person, Long> implements CrudService<Person, Long> {
+public class PetServiceMap extends AbstractMapService<Pet, Long> implements PetService {
     @Override
-    public Set<Person> findAll() {
+    public Set<Pet> findAll() {
         return super.findAll();
     }
 
@@ -17,17 +17,18 @@ public class PersonServiceMap extends AbstractMapService<Person, Long> implement
     }
 
     @Override
-    public void delete(Person object) {
+    public void delete(Pet object) {
         super.delete(object);
     }
 
     @Override
-    public Person save(Person object) {
+    public Pet save(Pet object) {
         return super.save(object.getId(), object);
     }
 
     @Override
-    public Person findById(Long id) {
+    public Pet findById(Long id) {
         return super.findById(id);
     }
+
 }
