@@ -1,10 +1,7 @@
 package com.mdakimball.petclinic.bootstrap;
 
 import com.mdakimball.petclinic.model.*;
-import com.mdakimball.petclinic.services.OwnerService;
-import com.mdakimball.petclinic.services.PetTypeService;
-import com.mdakimball.petclinic.services.SpecialtyService;
-import com.mdakimball.petclinic.services.VetService;
+import com.mdakimball.petclinic.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -21,11 +18,14 @@ public class DataLoader implements CommandLineRunner {
 
     private final SpecialtyService specialtyService;
 
-    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialtyService specialtyService) {
+    private final VisitService visitService;
+
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialtyService specialtyService, VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.specialtyService = specialtyService;
+        this.visitService = visitService;
     }
 
     @Override
@@ -86,6 +86,13 @@ public class DataLoader implements CommandLineRunner {
         owner2.getPets().add(aliceCat);
 
         ownerService.save(owner2);
+
+        Visit visit1 = new Visit();
+        visit1.setPet(aliceCat);
+        visit1.setDate(LocalDate.now());
+        visit1.setDescription("licking until hotspots");
+
+        visitService.save(visit1);
 
         System.out.println("Loaded Owners...");
 
